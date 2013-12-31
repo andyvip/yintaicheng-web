@@ -1,5 +1,4 @@
 var fullstate = false;
-
 $(document).ready(function(){
     var canvas = $('#firstfloor')[0];
     var canvasCxt = canvas.getContext("2d");
@@ -33,15 +32,45 @@ $(document).ready(function(){
 })
 
 $(document).ready(function(){
-    $('#firstfloor').click(function(){
-        if (fullstate) {
-            exitFullScreen();
-        }
-        else{
-            makeFullSceen(this);
-        }
-    })  
+    var canvas = $('#firstfloor')[0];
+    var canvasCxt = canvas.getContext("2d");
+    canvasCxt.moveTo(0,0);
+    canvasCxt.lineTo(100,100);
+    canvasCxt.lineTo(200,200);
+    canvasCxt.stroke();
 })
+
+$(document).ready(function(){
+    $("body").mousemove(function(evt){
+        $('#cur').text(evt.pageX + ":" + evt.pageY)
+    })
+})
+
+// $(document).ready(function(){
+//     $('#firstfloor').click(function(){
+//         if (fullstate) {
+//             exitFullScreen();
+//         }
+//         else{
+//             makeFullSceen(this);
+//         }
+//     })  
+// })
+
+function drawPath(nodeList){
+    var canvas = $('#firstfloor')[0];
+    var canvasCxt = canvas.getContext("2d");
+    canvasCxt.moveTo(nodeList[0][0], nodeList[0][1]);
+    for (var i = nodeList.length - 1; i >= 1; i--) {
+        canvasCxt.lineTo(nodeList[i][0], nodeList[i][1]);
+    }
+    canvasCxt.stroke();
+}
+
+function pointConvert(x, y){
+
+
+}
 
 function makeFullSceen(elem){
     if(elem.requestFullScreen){
