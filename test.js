@@ -30,6 +30,12 @@
 //     }
 // })
 
+var scaleX = 0,
+    scaleY = 0,
+    translateX = 0,
+    translateY = 0,
+    rotate = 0;
+
 $(document).ready(function(){
     var canvas = $('#firstfloor')[0];
     var canvasCxt = canvas.getContext("2d");
@@ -56,9 +62,10 @@ $(document).ready(function(){
     }
 
     canvasCxt.save();
-    canvasCxt.scale(1, 1);
-    canvasCxt.drawImage(img, 100, 100);
-    canvasCxt.restore();
+    canvasCxt.scale(canvas.height/img.height, canvas.height/img.height);
+    canvasCxt.translate(canvas.width/(2*canvas.height/img.height) - img.width/2, 0);
+    canvasCxt.drawImage(img, 40, 40);
+    //canvasCxt.restore();
 
     canvasCxt.moveTo(14*20,8*20);
     canvasCxt.lineTo(12*20,10*20);
