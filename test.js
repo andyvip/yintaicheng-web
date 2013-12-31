@@ -64,11 +64,11 @@ $(document).ready(function(){
     canvasCxt.save();
     canvasCxt.scale(canvas.height/img.height, canvas.height/img.height);
     canvasCxt.translate(canvas.width/(2*canvas.height/img.height) - img.width/2, 0);
-    canvasCxt.drawImage(img, 40, 40);
+    canvasCxt.drawImage(img, 20, 20);
     //canvasCxt.restore();
 
-    canvasCxt.moveTo(14*20,8*20);
-    canvasCxt.lineTo(12*20,10*20);
+    canvasCxt.moveTo(10*20,4*20);
+    canvasCxt.lineTo(8*20,6*20);
     canvasCxt.stroke();
 })
 
