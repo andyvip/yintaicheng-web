@@ -5,14 +5,14 @@ $(document).ready(function(){
     var img = new Image();
     img.src = "res/firstfloor.jpg";
 
-    console.log('screen-->' + screen.width + ':' + screen.height);
-    console.log('canvas-->' + canvas.width + ':' + canvas.height);
-    console.log('img-->' + img.width + ':' + img.height);
+    // console.log('screen-->' + screen.width + ':' + screen.height);
+    // console.log('canvas-->' + canvas.width + ':' + canvas.height);
+    // console.log('img-->' + img.width + ':' + img.height);
 
     canvas.width = screen.width - 20;
     canvas.height = screen.height - 30;
 
-    console.log('canvas-->' + canvas.width + ':' + canvas.height);
+    //console.log('canvas-->' + canvas.width + ':' + canvas.height);
 
     if (img.width >= img.height) {
         canvasCxt.save();
@@ -31,46 +31,47 @@ $(document).ready(function(){
     }
 })
 
-$(document).ready(function(){
-    var canvas = $('#firstfloor')[0];
-    var canvasCxt = canvas.getContext("2d");
-    canvasCxt.moveTo(0,0);
-    canvasCxt.lineTo(100,100);
-    canvasCxt.lineTo(200,200);
-    canvasCxt.stroke();
-})
+
 
 $(document).ready(function(){
-    $("body").mousemove(function(evt){
-        $('#cur').text(evt.pageX + ":" + evt.pageY)
-    })
+    $('#firstfloor').click(function(){
+        if (fullstate) {
+            exitFullScreen();
+        }
+        else{
+            makeFullSceen(this);
+        }
+    })  
 })
 
-// $(document).ready(function(){
-//     $('#firstfloor').click(function(){
-//         if (fullstate) {
-//             exitFullScreen();
-//         }
-//         else{
-//             makeFullSceen(this);
-//         }
-//     })  
-// })
+
 
 function drawPath(nodeList){
     var canvas = $('#firstfloor')[0];
     var canvasCxt = canvas.getContext("2d");
-    canvasCxt.moveTo(nodeList[0][0], nodeList[0][1]);
-    for (var i = nodeList.length - 1; i >= 1; i--) {
-        canvasCxt.lineTo(nodeList[i][0], nodeList[i][1]);
+    var convertedNodeList = pointConvert(nodeList);
+
+    canvasCxt.moveTo(convertedNodeList[0][0], convertedNodeList[0][1]);
+
+    for (var i = convertedNodeList.length - 1; i >= 1; i--) {
+        canvasCxt.lineTo(convertedNodeList[i][0], convertedNodeList[i][1]);
     }
     canvasCxt.stroke();
 }
 
-function pointConvert(x, y){
+function pointConvert(nodeList){
+    var convertedNodeList =  new Array();
 
+    for (var i = 0; i < nodeList.length; i++) {
+        var x = nodeList[i][0];
+        var y = nodeList[i][1];
+        //............
 
+        convertedNodeList[i] = new Array(x, y);
+    }
+    return convertedNodeList;
 }
+
 
 function makeFullSceen(elem){
     if(elem.requestFullScreen){
@@ -92,6 +93,7 @@ function makeFullSceen(elem){
     fullstate = true;
     return;
 }
+
 
 function exitFullScreen(){
     if (document.exitFullScreen){ 
