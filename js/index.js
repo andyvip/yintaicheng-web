@@ -71,6 +71,7 @@ function drawPath(nodeList){
     var canvasCxt = canvas.getContext("2d");
     var convertedNodeList = pointConvert(nodeList);
 
+    canvasCxt.beginPath()
     canvasCxt.moveTo(convertedNodeList[0][0], convertedNodeList[0][1]);
 
     for (var i = 0; i < convertedNodeList.length; i++) {
