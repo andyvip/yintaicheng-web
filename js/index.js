@@ -1,6 +1,15 @@
 var fullstate = false;
 
 $(document).ready(function(){
+    $('#get').click(function(){
+        getPath($('#start').val(), $('#end').val(), function(data){
+            console.log(data)
+            drawPath(data)
+        })
+    }) 
+})
+
+$(document).ready(function(){
     var canvas = $('#firstfloor')[0];
     var canvasCxt = canvas.getContext("2d");
     var img = new Image();
@@ -15,41 +24,33 @@ $(document).ready(function(){
 
     //console.log('canvas-->' + canvas.width + ':' + canvas.height);
 
-    canvasCxt.moveTo(0,0);
-    for (var x = 0; x <= canvas.width; x += 20){
-        canvasCxt.moveTo(x,0);
-        canvasCxt.lineTo(x, canvas.height);
-    }
-    for (var x = 0; x <= canvas.height; x += 20){
-        canvasCxt.moveTo(0, x);
-        canvasCxt.lineTo(canvas.width, x);
-    }
+    // canvasCxt.moveTo(0,0);
+    // for (var x = 0; x <= canvas.width; x += 20){
+    //     canvasCxt.moveTo(x,0);
+    //     canvasCxt.lineTo(x, canvas.height);
+    // }
+    // for (var x = 0; x <= canvas.height; x += 20){
+    //     canvasCxt.moveTo(0, x);
+    //     canvasCxt.lineTo(canvas.width, x);
+    // }
 
-    // if (img.width >= img.height) {
-    //     canvasCxt.save();
-    //     canvasCxt.scale(canvas.height/img.width, canvas.height/img.width);
-    //     canvasCxt.translate(img.height/2 + canvas.width/(2*canvas.height/img.width), 0);
-    //     canvasCxt.rotate(Math.PI/2);
-    //     canvasCxt.drawImage(img, 0, 0);
-    //     //canvasCxt.restore();
-    // }
-    // else{
-    //     canvasCxt.save();
-    //     canvasCxt.scale(canvas.height/img.height, canvas.height/img.height);
-    //     canvasCxt.translate(canvas.width/(2*canvas.height/img.height) - img.width/2, 0);
-    //     canvasCxt.drawImage(img, 0, 0);
-    //     //canvasCxt.restore();
-    // }
+    if (img.width >= img.height) {
+        canvasCxt.save();
+        canvasCxt.scale(canvas.height/img.width, canvas.height/img.width);
+        canvasCxt.translate(img.height/2 + canvas.width/(2*canvas.height/img.width), 0);
+        canvasCxt.rotate(Math.PI/2);
+        canvasCxt.drawImage(img, 0, 0);
+        //canvasCxt.restore();
+    }
+    else{
+        canvasCxt.save();
+        canvasCxt.scale(canvas.height/img.height, canvas.height/img.height);
+        canvasCxt.translate(canvas.width/(2*canvas.height/img.height) - img.width/2, 0);
+        canvasCxt.drawImage(img, 0, 0);
+        //canvasCxt.restore();
+    }
 
     canvasCxt.drawImage(img, 0, 0);
-    // canvasCxt.moveTo(9*20,3*20);
-    // canvasCxt.lineTo(7*20,5*20);
-    canvasCxt.stroke();
-
-    //  getPath("A", "F", function(data){
-    //     console.log(data)
-    //     drawPath(data)
-    // })
 })
 
 

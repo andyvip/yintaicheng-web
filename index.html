@@ -8,12 +8,34 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
         <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-        <script type="text/javascript" src="js/firstfloor.js"></script>
-        <link rel="stylesheet" href="css/firstfloor.css" />
+        <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.css" />
+
+        <script type="text/javascript" src="js/api.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <link rel="stylesheet" href="css/index.css" />
         <title>银泰城</title>
     </head>
     <body>
-        <canvas id="firstfloor"></canvas>
+        <div data-role="page">
+            <div data-role="header">
+                <h1>银泰城</h1>
+            </div>
+            <div data-role="content" id="">
+                <form>
+                    <input type="text" placeholder="起点" id="start" />
+                    <input type="text" placeholder="终点" id="end" />
+                    <a href="#graph"><input type="submit" data-inline="true" value="提交" id="get"/></a>
+                </form>
+            </div>
+        </div>
+
+        <div data-role="page" id="graph">
+            <div data-role="content">
+                <canvas id="firstfloor"></canvas>
+            </div>
+        </div>
+
     </body>
 </html>
 

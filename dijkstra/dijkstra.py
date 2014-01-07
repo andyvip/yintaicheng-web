@@ -8,9 +8,10 @@ class Edge(object):
 
 
 class Node(object):
-    def __init__(self, nodeId, edgeList):
+    def __init__(self, nodeId, edgeList, position):
         self.nodeId = nodeId
         self.edgeList = edgeList
+        self.position = position
 
         
 class Path(object):
@@ -56,7 +57,7 @@ class Graph(object):
         path.routeList.append(originNodeId)
 
 
-    def getMinPath(self, originNodeId):
+    def getMinPath(self):
         destNode = None
         weight = 8888
         for node in self.nodeList:
@@ -69,7 +70,7 @@ class Graph(object):
 
     def dijkstra(self, originNodeId, destNodeId):
         self.initPaths(originNodeId)
-        curNode = self.getMinPath(originNodeId)
+        curNode = self.getMinPath()
         while curNode is not None:
             curPath = self.pathDic[curNode.nodeId]
             curPath.visited = True
@@ -80,12 +81,26 @@ class Graph(object):
                     minPath.weight = curPath.weight + edge.weight
                     minPath.routeList = curPath.routeList + [curNode.nodeId]
 
-            curNode = self.getMinPath(originNodeId)
+            curNode = self.getMinPath()
 
         route = self.pathDic[destNodeId].routeList
         if route == []:
-            return route
-        else:    
-            return route + [destNodeId]           
+            return None
+        else:
+            routePosition = []
+            route.append(destNodeId)    
+            for nodeId in route:
+                for node in self.nodeList:
+                    if nodeId == node.nodeId:
+                        routePosition.append(node.position)
+                        break
+
+            return routePosition
+
+
+                  
+
+
+
 
         
